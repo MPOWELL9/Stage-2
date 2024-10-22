@@ -1,52 +1,65 @@
 
-// temporary cache, until we add the database.
+const WatchItem = require('../models/watchItem');
+const watchItem= require('./models/watchItem');
 
-let watchListData = [];
 
-const addItem= (symbol) => {
 
-    if(!Symbol) {
-        console.log (' symbol is not vaild.')
+const addItem= async(symbol) => {
+    //clean up and add some erroe handlings...!!
+
+    try{
+        if(!Symbol) {
+            console.log (' symbol is not vaild.')
+        }
+        
+        console.log ('item ${symbol} added to watch list')
+    
+        //add symbol to watch list
+    
+        const item = new WatchItemModel ({
+            symbol: symbol,
+            dateCreated: Date.now()
+        })
+        
+        await item.save();
+
     }
+
+    catch (err) {
+        console.log ('error adding item: ${err}')
+    }
+
+
+    }
+
+    const removeItem = async(symbol) => {
+    try {
+        if (!symbol) {
+            console.log ('symbol is not valid')
+        }
+    console.log('item ${symbol} removed from watch list')
+        
+        await WatchItem.deletOne({symbol: symbol});
+    }
+    catch (err){
+    console.log('error removing item :${err}')
+    }
+    }
+    const getItems = async () => {
+    try{
     
-    console.log ('item ${symbol} added to watch list')
-
-    //add symbol to watch list
-    watchListDatta.push(symbol);
-}
-
-
-const removeItem=(symbol) => {
-    
-    if (!symbol){
-
+    }
+    catch (err){
+console.log('error fetching items ${err}')
    
-    console.log('symbol is not valid.')
-   
-   }
-   console.log('item ${symbol} removed from watch list')
-
-   //filter out the symbol to remove
-
-watchListData = watchListData.filter(item=> item !== symbol);
-
-
-console.log('item$(symbol) removed from watch list')
-
-
-} 
-
-
-
-
-const getItems = () => {
+    }
     console.log(' watch list items fetched..')
 
-    return watchListData;
-
-
+    const items =await watchItem.find({})
+    return items;
 }
-modules.exports= {
+
+    modules.exports= {
     addItem,
     removeItem,
     getItems

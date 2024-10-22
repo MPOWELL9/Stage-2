@@ -2,11 +2,11 @@ const mongoose =require('mongoose');
 
 const dbUrl = "mongodb://localhost:27017/crypto-coin-tracker";
 
-mongoose.connect(dbUrl);
+const connectToDb = async() =>{
 
-const dbConnection = mongoose.connection;
+    const dbConnection = mongoose.connection;
 
-// set event listeners
+// set event listeners - before await connect to ensure listeners are configured before connectiion starts...
 dbConnection.on('open', () => {
     console.log('Connected to MongoDb')
 })
@@ -14,3 +14,10 @@ dbConnection.on('open', () => {
 dbConnection.on('error', (err)=> {
     console.log ('Mongoose connection error: ${err}')
 })
+
+await mongoose.connect(dbUrl);
+}
+
+module.exports = {
+    connectToDb
+}
