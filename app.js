@@ -45,10 +45,10 @@ connectToDb().then(()=>{
     console.log('MongoDb connection completed..')
 
 
-// start express server on specific port
-app.listen(port, () => {
-    console.log('Express server started on ${port}')
-})
+    // start express server on specific port
+    app.listen(port, () => {
+        console.log(`Express server started on ${port}`)
+    })
 })
 
 

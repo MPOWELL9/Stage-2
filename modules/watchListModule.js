@@ -1,6 +1,6 @@
 
 const WatchItem = require('../models/watchItem');
-const watchItem= require('./models/watchItem');
+
 
 
 
@@ -59,7 +59,7 @@ console.log('error fetching items ${err}')
     return items;
 }
 
-    modules.exports= {
+    module.exports= {
     addItem,
     removeItem,
     getItems

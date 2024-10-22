@@ -5,6 +5,6 @@ const watchItemSchema = mongoose.Schema( {
 
 });
 
-const WatchItem= mongoose.Aggregate.model('WatchItem', watchItemSchema)
+const WatchItem= mongoose.model('WatchItem', watchItemSchema)
 
 module.exports = WatchItem;
